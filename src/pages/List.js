@@ -1,12 +1,14 @@
 import React from 'react';
 import { SafeAreaView, Text, FlatList, StyleSheet } from 'react-native';
-import VideoCard from '../components/VideoCard.component';
 
+import HeaderHome from '../components/HeaderHome.component';
+import VideoCard from '../components/VideoCard.component';
 import youtubeVideos from '../youtubeVideos';
 
 export default function List() {
     return (
         <SafeAreaView style={styles.container}>
+            <HeaderHome />
             <FlatList 
                 style={styles.list}
                 data={youtubeVideos}
@@ -22,10 +24,12 @@ export default function List() {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        backgroundColor: '#fff',
     },
 
     list: {
-        flex: 1
+        flex: 1,
+        backgroundColor: '#eee',
     }
 });

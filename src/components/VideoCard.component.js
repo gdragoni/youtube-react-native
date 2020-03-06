@@ -1,13 +1,17 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, Dimensions } from 'react-native'; 
+import { View, Text, Image, TouchableHighlight, StyleSheet, Dimensions, Linking } from 'react-native'; 
 
 export default function VideoCard({ video }) {
     return (
         <View style={styles.container}>
-            <Image resizeMode={'cover'} style={styles.videoImage} source={{ uri: video.videoThumbnail }} />
+            <TouchableHighlight onPress={() => {
+                Linking.openURL(video.url).catch((err) => console.error('An error occurred', err));
+            }}>
+                <Image resizeMode={'cover'} style={styles.videoImage} source={{ uri: video.videoThumbnail }} />
+            </TouchableHighlight>
             <View style={{ flexDirection: 'row', marginTop: 20 }}>
                 <View style={{ flex: 1, alignItems: 'center' }}>
-                    <Image resizeMode={'cover'} style={styles.channelImage} source={{ uri: video.videoThumbnail }} />
+                    <Image resizeMode={'cover'} style={styles.channelImage} source={{ uri: video.channelThumbnail }} />
                 </View>
                 <View style={{ flex: 4 }}>
                     <Text style={styles.title}>{video.title}</Text>
@@ -20,7 +24,8 @@ export default function VideoCard({ video }) {
 
 const styles = StyleSheet.create({
     container: {
-        width: Dimensions.get('window').width
+        width: Dimensions.get('window').width,
+        marginBottom: 20,
     },
 
     videoImage: {
@@ -35,12 +40,14 @@ const styles = StyleSheet.create({
     },
 
     title: {
-        fontWeight: 'bold',
-        fontSize: 20,
+        color: '#222',
+        fontSize: 18,
         marginRight: 5
     },
 
     description: {
-        fontSize: 16,
+        color: '#444',
+        marginTop: 3,
+        fontSize: 14,
     }
 });

@@ -29,7 +29,7 @@ export default function routes() {
         })}
         tabBarOptions={{
             activeTintColor: 'red',
-            inactiveTintColor: 'gray'
+            inactiveTintColor: '#666'
         }}
       >
         <Tab.Screen name="Home" component={List} />
