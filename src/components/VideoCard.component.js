@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, Text, Image, TouchableHighlight, StyleSheet, Dimensions, Linking } from 'react-native'; 
 
-export default VideoCard = ({ video }) => {
+export default VideoCard = ({ video, onTap }) => {
     return (
         <View style={styles.container}>
             <TouchableHighlight onPress={() => {
-                Linking.openURL(video.url).catch((err) => console.error('An error occurred', err));
+                onTap()
             }}>
                 <Image resizeMode={'cover'} style={styles.videoImage} source={{ uri: video.videoThumbnail }} />
             </TouchableHighlight>

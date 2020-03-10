@@ -5,7 +5,7 @@ import HeaderHome from '../components/HeaderHome.component';
 import VideoCard from '../components/VideoCard.component';
 import youtubeVideos from '../youtubeVideos';
 
-export default function List() {
+export default function List({ navigation }) {
 
     return (
         <SafeAreaView style={styles.container}>
@@ -15,8 +15,8 @@ export default function List() {
                 data={youtubeVideos}
                 keyExtractor={video => video._id}
                 showsVerticalScrollIndicator={false}
-                renderItem={({ item }) => {
-                    return <VideoCard key={item._id} video={item} />
+                renderItem={({ item: video }) => {
+                    return <VideoCard key={video._id} onTap={() => navigation.navigate('Detail', { video })} video={video} />
                 }}
             />
         </SafeAreaView>

@@ -2,18 +2,31 @@ import React from 'react';
 import { Image, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
 
 import List from '../pages/List';
 import Library from '../pages/Library';
 import Mail from '../pages/Mail';
 import Trending from '../pages/Trending';
 import Subscribe from '../pages/Subscribe';
+import Detail from '../pages/Detail';
 
 const Tab = createBottomTabNavigator();
+const HomeStack = createStackNavigator();
 
-export default function routes() {
+function HomeStackScreen() {
   return (
     <NavigationContainer>
+      <HomeStack.Navigator headerMode="none">
+        <HomeStack.Screen name="Home" component={TabScreen} />
+        <HomeStack.Screen name="Detail" component={Detail} />
+      </HomeStack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+function TabScreen() {
+  return (
       <Tab.Navigator
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
@@ -38,6 +51,11 @@ export default function routes() {
         <Tab.Screen name="Mail" component={Mail} />
         <Tab.Screen name="Library" component={Library} />
       </Tab.Navigator>
-    </NavigationContainer>
   );
+}
+
+export default function Route() {
+  return (
+    <HomeStackScreen />
+  )
 }
