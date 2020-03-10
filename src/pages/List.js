@@ -6,6 +6,7 @@ import VideoCard from '../components/VideoCard.component';
 import youtubeVideos from '../youtubeVideos';
 
 export default function List() {
+
     return (
         <SafeAreaView style={styles.container}>
             <HeaderHome />
