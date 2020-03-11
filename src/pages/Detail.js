@@ -9,8 +9,8 @@ export default function Detail({ route }) {
 
     return (
         <SafeAreaView style={styles.container}>
+            <Image resizeMode={'cover'} style={styles.videoImage} source={{ uri: video.videoThumbnail }} />
             <ScrollView>
-                <Image resizeMode={'cover'} style={styles.videoImage} source={{ uri: video.videoThumbnail }} />
                 <View style={{ padding: 18 }}>
                     <Text style={styles.title}>{video.title}</Text>
                     <Text style={[styles.description, { marginTop: 8 }]}>{"1.687.140 visualizações"}</Text>
@@ -71,25 +71,25 @@ export default function Detail({ route }) {
                         </TouchableHighlight>
                     </View>
                 </View>
-                <FlatList 
-                    style={styles.list}
-                    data={youtubeVideos}
-                    keyExtractor={video => video._id}
-                    showsVerticalScrollIndicator={false}
-                    renderItem={({ item }) => {
-                        return (
-                            <View style={{ flexDirection: "row", paddingHorizontal: 18, paddingVertical: 10, height: halfCardWidth/1.8+20 }}>
-                                <Image resizeMode={'cover'} style={styles.videoRightImage} source={{ uri: item.videoThumbnail }} />
-                                <View style={{ width: halfCardWidth, marginLeft: 12 }}>
-                                    <Text numberOfLines={3} ellipsizeMode='tail' style={styles.title}>{item.title}</Text>
-                                    <Text numberOfLines={2} ellipsizeMode='tail' style={[styles.description, { marginTop: 8 }]}>{item.description}</Text>
-                                </View>
-                            </View>
-                        )
-                    }}
-                />
+                {
+                    youtubeVideos.map((item) => {
+                        return <VideoCard key={item._id} item={item} />
+                    })
+                }
             </ScrollView>
         </SafeAreaView>
+    )
+}
+
+const VideoCard = ({ item }) => {
+    return (
+        <View style={{ flexDirection: "row", paddingHorizontal: 18, paddingVertical: 10, height: halfCardWidth/1.8+20 }}>
+            <Image resizeMode={'cover'} style={styles.videoRightImage} source={{ uri: item.videoThumbnail }} />
+            <View style={{ width: halfCardWidth, marginLeft: 12 }}>
+                <Text numberOfLines={3} ellipsizeMode='tail' style={styles.title}>{item.title}</Text>
+                <Text numberOfLines={2} ellipsizeMode='tail' style={[styles.description, { marginTop: 8 }]}>{item.description}</Text>
+            </View>
+        </View>
     )
 }
 
